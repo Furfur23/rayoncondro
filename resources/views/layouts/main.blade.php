@@ -35,7 +35,6 @@
                 ✅ {{ session('success') }}
             </div>
         @endif
-
         @if(session('error'))
             <div class="mb-4 p-3 bg-red-100 text-red-800 rounded-lg text-sm">
                 ❌ {{ session('error') }}
@@ -48,58 +47,68 @@
     {{-- Bottom Navigation --}}
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
         <div class="max-w-2xl mx-auto flex">
-            @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('warga'))
-                <a href="{{ dashboard_route() }}"
-                    class="flex-1 flex flex-col items-center py-3 text-xs
-                    {{ request()->routeIs('*.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                    <span class="text-xl">🏠</span>
-                    Dashboard
+
+            @if(auth()->user()->hasRole('admin'))
+            {{-- ── ADMIN ── --}}
+                <a href="{{ route('admin.dashboard') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('admin.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏠</span>Dashboard
                 </a>
-                <a href="{{ auth()->user()->hasRole('admin') ? route('admin.presensi.index') : route('warga.presensi.index') }}" 
-                    class="flex-1 flex flex-col items-center py-3 text-xs
-                    {{ request()->routeIs('*.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                    <span class="text-xl">📝</span>
-                    Presensi
+                <a href="{{ route('admin.presensi.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('admin.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">📝</span>Presensi
                 </a>
-                <a href="#"
-                    class="flex-1 flex flex-col items-center py-3 text-xs
-                    {{ request()->routeIs('*.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                    <span class="text-xl">💰</span>
-                    Kas
+                <a href="{{ route('admin.kas.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('admin.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">💰</span>Kas
                 </a>
                 <a href="#"
-                    class="flex-1 flex flex-col items-center py-3 text-xs
-                    {{ request()->routeIs('*.anggota*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                    <span class="text-xl">👥</span>
-                    Anggota
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('admin.anggota*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">👥</span>Anggota
                 </a>
+
+            @elseif(auth()->user()->hasRole('warga'))
+            {{-- ── WARGA ── --}}
+                <a href="{{ route('warga.dashboard') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏠</span>Dashboard
+                </a>
+                <a href="{{ route('warga.presensi.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">📝</span>Presensi
+                </a>
+                <a href="{{ route('warga.kas.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">💰</span>Kas
+                </a>
+                <a href="#"
+                    class="flex-1 flex flex-col items-center py-3 text-xs text-gray-500">
+                    <span class="text-xl">👥</span>Anggota
+                </a>
+
             @else
-                <a href="{{ dashboard_route() }}"
-                    class="flex-1 flex flex-col items-center py-3 text-xs
-                    {{ request()->routeIs('*.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                    <span class="text-xl">🏠</span>
-                    Dashboard
+            {{-- ── SISWA ── --}}
+                <a href="{{ route('siswa.dashboard') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏠</span>Dashboard
+                </a>
+                <a href="{{ route('siswa.presensi.riwayat') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">📋</span>Presensi
+                </a>
+                <a href="{{ route('siswa.kas.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">💰</span>Kas Saya
                 </a>
                 <a href="#"
                     class="flex-1 flex flex-col items-center py-3 text-xs text-gray-500">
-                    <span class="text-xl">📋</span>
-                    Presensi
-                </a>
-                <a href="#"
-                    class="flex-1 flex flex-col items-center py-3 text-xs text-gray-500">
-                    <span class="text-xl">💰</span>
-                    Kas Saya
-                </a>
-                <a href="#"
-                    class="flex-1 flex flex-col items-center py-3 text-xs text-gray-500">
-                    <span class="text-xl">👤</span>
-                    Profil
+                    <span class="text-xl">👤</span>Profil
                 </a>
             @endif
+
         </div>
     </nav>
 
-    {{-- Spacer biar konten tidak ketutup bottom nav --}}
     <div class="h-20"></div>
 
 </body>

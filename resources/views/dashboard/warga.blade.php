@@ -52,7 +52,7 @@
             <span class="text-3xl block mb-1">📝</span>
             <span class="text-sm font-semibold">Presensi Hari Ini</span>
         </a>
-        <a href="#"
+        <a href="{{ route('warga.kas.index') }}"
             class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl p-4 text-center shadow-sm transition">
             <span class="text-3xl block mb-1">💰</span>
             <span class="text-sm font-semibold">Kas Belum Lunas</span>
