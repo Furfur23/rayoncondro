@@ -30,6 +30,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/kas/rekap/semua', [KasController::class, 'rekap'])->name('kas.rekap');
 
     // Anggota
+    Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota.index'); 
     Route::get('/anggota/siswa', [AnggotaController::class, 'siswa'])->name('anggota.siswa');
     Route::get('/anggota/siswa/create', [AnggotaController::class, 'createSiswa'])->name('anggota.siswa.create');
     Route::post('/anggota/siswa', [AnggotaController::class, 'storeSiswa'])->name('anggota.siswa.store');
@@ -40,6 +41,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/anggota/warga', [AnggotaController::class, 'warga'])->name('anggota.warga');
     Route::get('/anggota/warga/create', [AnggotaController::class, 'createWarga'])->name('anggota.warga.create');
     Route::post('/anggota/warga', [AnggotaController::class, 'storeWarga'])->name('anggota.warga.store');
+    
 });
 
 // ── WARGA ────────────────────────────────────────────────

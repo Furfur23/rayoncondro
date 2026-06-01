@@ -53,7 +53,7 @@ class AnggotaController extends Controller
             'alamat'            => 'nullable|string',
             'tanggal_lahir'     => 'nullable|date',
             'tingkat_sabuk'     => 'required|in:polos,jambon,hijau,putih,kuning,merah,merah_putih',
-            'tanggal_naik_sabuk'=> 'nullable|date',
+            'tanggal_naik_sabuk' => 'nullable|date',
             'tanggal_bergabung' => 'nullable|date',
         ]);
 
@@ -96,7 +96,7 @@ class AnggotaController extends Controller
             'alamat'            => 'nullable|string',
             'tanggal_lahir'     => 'nullable|date',
             'tingkat_sabuk'     => 'required|in:polos,jambon,hijau,putih,kuning,merah,merah_putih',
-            'tanggal_naik_sabuk'=> 'nullable|date',
+            'tanggal_naik_sabuk' => 'nullable|date',
             'status'            => 'required|in:aktif,berhenti',
         ]);
 
@@ -175,5 +175,11 @@ class AnggotaController extends Controller
 
         return redirect()->route('admin.anggota.warga')
             ->with('success', "Warga {$user->name} berhasil ditambahkan!");
+    }
+
+    // ── Halaman index anggota ────────────────────────────
+    public function index()
+    {
+        return view('anggota.index');
     }
 }
