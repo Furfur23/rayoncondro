@@ -69,45 +69,51 @@
                 {{ request()->routeIs('admin.anggota*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
                 <span class="text-xl">👥</span>Anggota
             </a>
+            <a href="{{ route('generasi.index') }}"
+                class="flex-1 flex flex-col items-center py-3 text-xs
+                    {{ request()->routeIs('generasi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                <span class="text-xl">🏛️</span>Galeri
 
-            @elseif(auth()->user()->hasRole('warga'))
-            {{-- ── WARGA ── --}}
-            <a href="{{ route('warga.dashboard') }}"
-                class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                <span class="text-xl">🏠</span>Dashboard
-            </a>
-            <a href="{{ route('warga.presensi.index') }}"
-                class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                <span class="text-xl">📝</span>Presensi
-            </a>
-            <a href="{{ route('warga.kas.index') }}"
-                class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                <span class="text-xl">💰</span>Kas
-            </a>
-            <a href="#"
-                class="flex-1 flex flex-col items-center py-3 text-xs text-gray-500">
-                <span class="text-xl">👥</span>Anggota
-            </a>
+                @elseif(auth()->user()->hasRole('warga'))
+                {{-- ── WARGA ── --}}
+                <a href="{{ route('warga.dashboard') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏠</span>Dashboard
+                </a>
+                <a href="{{ route('warga.presensi.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">📝</span>Presensi
+                </a>
+                <a href="{{ route('warga.kas.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('warga.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">💰</span>Kas
+                </a>
+                <a href="{{ route('generasi.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs
+                {{ request()->routeIs('generasi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏛️</span>Galeri
+                </a>
 
-            @else
-            {{-- ── SISWA ── --}}
-            <a href="{{ route('siswa.dashboard') }}"
-                class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                <span class="text-xl">🏠</span>Dashboard
-            </a>
-            <a href="{{ route('siswa.presensi.riwayat') }}"
-                class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                <span class="text-xl">📋</span>Presensi
-            </a>
-            <a href="{{ route('siswa.kas.index') }}"
-                class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
-                <span class="text-xl">💰</span>Kas Saya
-            </a>
-            <a href="#"
-                class="flex-1 flex flex-col items-center py-3 text-xs text-gray-500">
-                <span class="text-xl">👤</span>Profil
-            </a>
-            @endif
+                @else
+                {{-- ── SISWA ── --}}
+                <a href="{{ route('siswa.dashboard') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.dashboard') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏠</span>Dashboard
+                </a>
+                <a href="{{ route('siswa.presensi.riwayat') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.presensi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">📋</span>Presensi
+                </a>
+                <a href="{{ route('siswa.kas.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs {{ request()->routeIs('siswa.kas*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">💰</span>Kas Saya
+                </a>
+                <a href="{{ route('generasi.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs
+                {{ request()->routeIs('generasi*') ? 'text-green-600 font-semibold' : 'text-gray-500' }}">
+                    <span class="text-xl">🏛️</span>Galeri
+                </a>
+                @endif
 
         </div>
     </nav>
