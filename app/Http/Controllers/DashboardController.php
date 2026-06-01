@@ -49,7 +49,7 @@ class DashboardController extends Controller
             'persentase_hadir'   => $user->persentaseKehadiran(),
             'total_hadir'        => $user->attendances()->where('status', 'hadir')->count(),
             'total_latihan'      => $user->attendances()->count(),
-            'tagihan_belum_lunas'=> KasPembayaran::where('user_id', $user->id)
+            'tagihan_belum_lunas' => KasPembayaran::where('user_id', $user->id)
                 ->where('status', 'belum_lunas')
                 ->with('tagihan')
                 ->get(),
@@ -74,12 +74,17 @@ class DashboardController extends Controller
         $jadwal = $this->getJadwalHariIni();
         if (!$jadwal) return ['sudah' => 0, 'belum' => 0, 'total' => 0];
 
-        $totalSiswa = User::role('siswa')
+        // Hanya hitung siswa aktif
+        $siswaAktif = User::role('siswa')
             ->whereHas('siswaProfile', fn($q) => $q->where('status', 'aktif'))
-            ->count();
+            ->pluck('id');
 
+        $totalSiswa = $siswaAktif->count();
+
+        // Hanya hitung presensi dari siswa aktif
         $sudahDiisi = Attendance::where('jadwal_latihan_id', $jadwal->id)
             ->whereDate('tanggal', today())
+            ->whereIn('user_id', $siswaAktif) // ← filter hanya siswa aktif
             ->count();
 
         return [

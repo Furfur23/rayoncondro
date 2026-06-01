@@ -2,61 +2,66 @@
 @section('title', 'Riwayat Presensi')
 
 @section('content')
-<div class="mb-4">
-    <h1 class="text-xl font-bold text-gray-800">📋 Riwayat Presensi Saya</h1>
+<div class="mb-5">
+    <h1 class="text-xl font-bold text-white">📋 Riwayat Presensi Saya</h1>
 </div>
 
 {{-- Persentase --}}
-<div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-4">
-    <p class="text-sm text-gray-500 mb-1">Total Kehadiran</p>
-    <div class="flex items-center gap-3">
-        <div class="w-full bg-gray-100 rounded-full h-3">
-            <div class="h-3 rounded-full {{ $persen >= 75 ? 'bg-green-500' : 'bg-red-400' }}"
-                style="width: {{ $persen }}%"></div>
+<div class="bg-gray-900 border border-gray-800 rounded-2xl p-4 mb-5">
+    <div class="flex items-center gap-4">
+        <div class="relative w-16 h-16 shrink-0">
+            <svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#374151" stroke-width="3"/>
+                <circle cx="18" cy="18" r="15.9" fill="none"
+                    stroke="{{ $persen >= 75 ? '#f59e0b' : '#ef4444' }}"
+                    stroke-width="3"
+                    stroke-dasharray="{{ $persen }}, 100"
+                    stroke-linecap="round"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-xs font-bold text-white">{{ $persen }}%</span>
+            </div>
         </div>
-        <span class="font-bold text-lg {{ $persen >= 75 ? 'text-green-600' : 'text-red-500' }}">
-            {{ $persen }}%
-        </span>
+        <div>
+            <p class="text-white font-semibold">Total Kehadiran</p>
+            <p class="text-xs text-gray-400 mt-0.5">
+                {{ $persen >= 75 ? '✅ Layak tes sabuk' : '⚠️ Belum layak (min. 75%)' }}
+            </p>
+        </div>
     </div>
-    @if($persen >= 75)
-        <p class="text-xs text-green-600 mt-1">✅ Layak tes sabuk</p>
-    @else
-        <p class="text-xs text-red-500 mt-1">⚠️ Belum layak tes sabuk (min. 75%)</p>
-    @endif
 </div>
 
-{{-- Tabel Riwayat --}}
+{{-- List riwayat --}}
 <div class="space-y-2">
     @forelse($riwayat as $r)
-        <div class="bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100 flex justify-between items-center">
+        @php
+            $config = match($r->status) {
+                'hadir' => ['bg-green-500/10 border-green-500/20', 'text-green-400', 'bg-green-500/20'],
+                'izin'  => ['bg-blue-500/10 border-blue-500/20',   'text-blue-400',  'bg-blue-500/20'],
+                'sakit' => ['bg-yellow-500/10 border-yellow-500/20','text-yellow-400','bg-yellow-500/20'],
+                'alpa'  => ['bg-red-500/10 border-red-500/20',     'text-red-400',   'bg-red-500/20'],
+                default => ['bg-gray-800 border-gray-700',         'text-gray-400',  'bg-gray-700'],
+            };
+        @endphp
+        <div class="bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 flex justify-between items-center">
             <div>
-                <p class="text-sm font-medium text-gray-800">
+                <p class="text-sm font-medium text-white">
                     {{ \Carbon\Carbon::parse($r->tanggal)->translatedFormat('l, d F Y') }}
                 </p>
                 <p class="text-xs text-gray-500">{{ $r->jadwal?->nama_sesi ?? 'Latihan Rutin' }}</p>
             </div>
-            @php
-                $badge = match($r->status) {
-                    'hadir' => 'bg-green-100 text-green-700',
-                    'izin'  => 'bg-blue-100 text-blue-700',
-                    'sakit' => 'bg-yellow-100 text-yellow-700',
-                    'alpa'  => 'bg-red-100 text-red-700',
-                    default => 'bg-gray-100 text-gray-700',
-                };
-            @endphp
-            <span class="text-xs font-semibold px-3 py-1 rounded-full capitalize {{ $badge }}">
+            <span class="text-xs font-semibold px-3 py-1 rounded-full capitalize
+                {{ $config[2] }} {{ $config[1] }}">
                 {{ $r->status }}
             </span>
         </div>
     @empty
-        <div class="text-center py-8 text-gray-400">
-            Belum ada riwayat presensi.
+        <div class="text-center py-10 text-gray-500">
+            <p class="text-4xl mb-2">📋</p>
+            <p>Belum ada riwayat presensi.</p>
         </div>
     @endforelse
 </div>
 
-{{-- Pagination --}}
-<div class="mt-4">
-    {{ $riwayat->links() }}
-</div>
+<div class="mt-4">{{ $riwayat->links() }}</div>
 @endsection
