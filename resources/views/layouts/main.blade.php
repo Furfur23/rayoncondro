@@ -77,6 +77,11 @@
                     {{ request()->routeIs('admin.anggota*') ? 'text-gold-400 font-semibold' : 'text-gray-500 hover:text-gray-300' }}">
                     <span class="text-xl mb-0.5">👥</span>Anggota
                 </a>
+                <a href="{{ route('generasi.index') }}"
+                    class="flex-1 flex flex-col items-center py-3 text-xs transition
+                    {{ request()->routeIs('generasi*') ? 'text-gold-400 font-semibold' : 'text-gray-500 hover:text-gray-300' }}">
+                    <span class="text-xl mb-0.5">🏛️</span>Galeri
+                </a>
 
             @elseif(auth()->user()->hasRole('warga'))
             {{-- ── WARGA ── --}}
