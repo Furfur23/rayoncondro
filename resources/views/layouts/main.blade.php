@@ -14,7 +14,7 @@
         <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <span class="text-xl">🥋</span>
-                <span class="font-bold text-gold-400 tracking-wide">Portal Rayon</span>
+                <span class="font-bold text-gold-400 tracking-wide">Rayon COndro</span>
             </div>
             <div class="flex items-center gap-3">
                 {{-- Dark mode toggle --}}
