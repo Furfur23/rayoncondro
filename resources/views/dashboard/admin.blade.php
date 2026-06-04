@@ -112,6 +112,13 @@
             Data Anggota
         </span>
     </a>
+    <a href="{{ route('profil.index') }}"
+        class="bg-gray-900 border border-gray-800 hover:border-gold-600 rounded-2xl p-4 text-center shadow transition group col-span-2">
+        <span class="text-3xl block mb-2">🏯</span>
+        <span class="text-sm font-semibold text-gray-200 group-hover:text-gold-400 transition">
+            Profil Rayon
+        </span>
+    </a>
 </div>
 
 

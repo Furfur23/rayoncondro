@@ -7,6 +7,7 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\GenerasiController;
+use App\Http\Controllers\ProfilController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -81,7 +82,7 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
 
 // ── GENERASI (semua role bisa lihat) ─────────────────────
 Route::middleware('auth')->group(function () {
-    Route::get('/generasi', [GenerasiController::class, 'index'])->name('generasi.index');
+    Route::get('/generasi', [GenerasiController::class, 'index']);
 });
 
 // ── PROFILE ──────────────────────────────────────────────
@@ -89,6 +90,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// ── PROFIL RAYON (semua role bisa lihat) ─────────────────
+Route::middleware('auth')->group(function () {
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
+    Route::get('/generasi', [GenerasiController::class, 'index'])->name('generasi.index');
+});
+
+// ── PROFIL RAYON EDIT (admin only) ───────────────────────
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/profil/edit', [ProfilController::class, 'edit'])->name('profil.edit.rayon');
+    Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update.rayon');
 });
 
 require __DIR__.'/auth.php';
