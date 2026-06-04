@@ -80,9 +80,11 @@ Route::middleware(['auth', 'role:siswa'])->prefix('siswa')->name('siswa.')->grou
     Route::get('/kas', [KasController::class, 'kasSiswa'])->name('kas.index');
 });
 
-// ── GENERASI (semua role bisa lihat) ─────────────────────
+// ── PROFILE BREEZE (akun user) ────────────────────────
 Route::middleware('auth')->group(function () {
-    Route::get('/generasi', [GenerasiController::class, 'index']);
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // ── PROFILE ──────────────────────────────────────────────
@@ -92,9 +94,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ── PROFIL RAYON (semua role bisa lihat) ─────────────────
+// ── PROFIL RAYON (halaman tentang rayon) ──────────────
 Route::middleware('auth')->group(function () {
-    Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index'); // ← beda! pakai 'profil' bukan 'profile'
     Route::get('/generasi', [GenerasiController::class, 'index'])->name('generasi.index');
 });
 
