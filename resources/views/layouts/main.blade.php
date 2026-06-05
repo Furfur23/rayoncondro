@@ -16,7 +16,7 @@
         <div class="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <span class="text-xl">🥋</span>
-                <span class="font-bold text-gold-400 tracking-wide">Rayon COndro</span>
+                <span class="font-bold text-gold-400 tracking-wide">Rayon Condro</span>
             </div>
             <div class="flex items-center gap-3">
                 {{-- Dark mode toggle --}}
@@ -132,7 +132,7 @@
             </a>
             <a href="{{ route('profil.index') }}"
                 class="flex-1 flex flex-col items-center py-3 text-xs transition
-                {{ request()->routeIs('profil*') ? 'text-gold-400 font-semibold' : 'text-gray-500 hover:text-gray-300' }}">
+                {{ request()->routeIs('profil*') ? 'text-gold-400 font-semibold' : 'text-gy-500 hover:text-gray-300' }}">
                 <span class="text-xl mb-0.5">🏯</span>Profil
             </a>
             @endif
